@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conversor de Moedas e Unidades</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <h1>Conversor</h1>
+  <p class="sub">Moedas em tempo real e unidades de medida.</p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-cur" aria-selected="true">Moedas</button>
+    <button class="tab" role="tab" id="tab-unit" aria-selected="false">Unidades</button>
+  </div>
+
+  <section class="card">
+    <div id="cats" class="cats hidden"></div>
+
+    <!-- Loading -->
+    <div id="loading" class="state">
+      <div class="spinner"></div>
+      <p style="color:var(--mute);font-size:.9rem;margin-bottom:12px">Buscando cotações…</p>
+      <div class="sk" style="height:72px;margin-bottom:10px"></div>
+      <div class="sk" style="height:72px"></div>
+    </div>
+
+    <!-- Erro -->
+    <div id="error" class="err hidden">
+      <strong>Não foi possível carregar as cotações.</strong>
+      <p style="margin-top:6px">A API pode estar offline ou você está sem conexão.</p>
+      <button class="btn" id="retry">Tentar novamente</button>
+    </div>
+
+    <!-- Conversor -->
+    <div id="app" class="hidden">
+      <div class="box">
+        <label for="amount">De</label>
+        <div class="row">
+          <input id="amount" type="text" inputmode="decimal" autocomplete="off" value="1" aria-label="Valor">
+          <select id="from" aria-label="Unidade de origem"></select>
+        </div>
+      </div>
+      <div class="mid"><button class="swap" id="swap" aria-label="Inverter"><svg viewBox="0 0 24 24"><path d="M7 4v16M7 20l-4-4M7 20l4-4M17 20V4M17 4l-4 4M17 4l4 4"/></svg></button></div>
+      <div class="box res">
+        <label>Para</label>
+        <div class="row">
+          <div class="out" id="out" aria-live="polite">—</div>
+          <select id="to" aria-label="Unidade de destino"></select>
+          <button class="copy" id="copy" aria-label="Copiar resultado"><svg id="ico" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg></button>
+        </div>
+      </div>
+      <div class="meta">
+        <div id="rate"></div>
+        <div id="upd" class="live"></div>
+      </div>
+    </div>
+  </section>
+  <p class="foot">Cotações: Frankfurter API (Banco Central Europeu)</p>
+</main>
+
+<!-- Ordem importa: cada módulo depende dos anteriores -->
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/currency.js"></script>
+<script src="js/units.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
